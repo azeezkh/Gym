@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -15,7 +16,7 @@ class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
-
+//
         val getButton : Button = findViewById(R.id.getBtn)
         val updateButton : Button = findViewById(R.id.updateBtn)
         val deleteButton : Button = findViewById(R.id.deleteBtn)
@@ -44,6 +45,13 @@ class EditActivity : AppCompatActivity() {
         val inflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var dialog_var = InfoDialogClass()
+        when (item.itemId) {
+            R.id.item1 -> dialog_var.show(supportFragmentManager, "Prices Information Dialog")
+        }
+        return true;
     }
 
 

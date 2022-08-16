@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 
@@ -41,6 +42,13 @@ class MemberActivity : AppCompatActivity() {
         val inflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var dialog_var = InfoDialogClass()
+        when (item.itemId) {
+            R.id.item1 -> dialog_var.show(supportFragmentManager, "Prices Information Dialog")
+        }
+        return true;
     }
 
     fun onClickAddName(flag : String) {
