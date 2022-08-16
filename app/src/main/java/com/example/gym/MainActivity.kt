@@ -51,8 +51,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var dialog_var = InfoDialogClass()
+        val mapIntent: Intent = Uri.parse(
+            "geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+Amman"
+        ).let { location ->
+             val location: Uri = Uri.parse("geo:37.422219,-122.08364?z=14")
+             Intent(Intent.ACTION_VIEW, location)
+             }
+
         when (item.itemId) {
             R.id.item1 -> dialog_var.show(supportFragmentManager, "Prices Information Dialog")
+            R.id.item2 -> startActivity(mapIntent)
         }
         return true;
     }

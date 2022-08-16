@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_baseline_pin_drop_24"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/item1"
-        android:title= "Cart"
+        android:title= "Info"
         android:icon="@drawable/ic_baseline_info_24"
         app:showAsAction="ifRoom"/>
 
