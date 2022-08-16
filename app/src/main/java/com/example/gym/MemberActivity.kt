@@ -60,38 +60,57 @@ class MemberActivity : AppCompatActivity() {
     }
 
     fun onClickAddName(flag : String) {
+        val URL = "content://com.example.Gym.MemberProvider"
+        val member = Uri.parse(URL)
+        val phoneNumber = findViewById<View>(R.id.numberET) as EditText
+        var count: Int = 0
+        var c = contentResolver.query(member, null, null, null, null)
 
-        val values = ContentValues()
-        values.put(
-            MemberProvider.F_NAME,
-            (findViewById<View>(R.id.firstET) as EditText).text.toString()
-        )
-        values.put(
-            MemberProvider.L_NAME,
-            (findViewById<View>(R.id.lastET) as EditText).text.toString()
-        )
-        values.put(
-            MemberProvider.AGE,
-            (findViewById<View>(R.id.ageET) as EditText).text.toString()
-        )
-        values.put(
-            MemberProvider.NUMBER,
-            (findViewById<View>(R.id.numberET) as EditText).text.toString()
-        )
-        values.put(
-            MemberProvider.MEMBERSHIP,
-            flag
-        )
+        if (c != null) {
+            if (c?.moveToFirst()) {
+                do {
+
+                    if (c.getString(c.getColumnIndex(MemberProvider.NUMBER)) == phoneNumber.text.toString()) {
+                        Toast.makeText(baseContext, "Number already exists", Toast.LENGTH_LONG)
+                            .show()
+                        count++
+                    }
 
 
+                } while (c.moveToNext())
+
+            }
+        }
+        if (count == 0) {
+            val values = ContentValues()
+            values.put(
+                MemberProvider.F_NAME,
+                (findViewById<View>(R.id.firstET) as EditText).text.toString()
+            )
+            values.put(
+                MemberProvider.L_NAME,
+                (findViewById<View>(R.id.lastET) as EditText).text.toString()
+            )
+            values.put(
+                MemberProvider.AGE,
+                (findViewById<View>(R.id.ageET) as EditText).text.toString()
+            )
+            values.put(
+                MemberProvider.NUMBER,
+                (findViewById<View>(R.id.numberET) as EditText).text.toString()
+            )
+            values.put(
+                MemberProvider.MEMBERSHIP,
+                flag
+            )
 
 
-        val uri = contentResolver.insert(
-            MemberProvider.CONTENT_URI, values
-        )
-        Toast.makeText(baseContext, uri.toString(), Toast.LENGTH_LONG).show()
+            val uri = contentResolver.insert(
+                MemberProvider.CONTENT_URI, values
+            )
+            Toast.makeText(baseContext, uri.toString(), Toast.LENGTH_LONG).show()
+        }
     }
-
 
 
 
