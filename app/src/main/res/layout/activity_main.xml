@@ -59,4 +59,16 @@
         app:layout_constraintVertical_bias="0.961"
         app:srcCompat="@drawable/ic_baseline_music_off_24" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="281dp"
+        android:layout_height="219dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.192"
+        app:srcCompat="@drawable/kissclipart_fitness_logo_vector_png_clipart_fitness_centre_phy_77840a10541d02e8" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
