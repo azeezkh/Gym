@@ -72,6 +72,7 @@ class EditActivity : AppCompatActivity() {
         val membership = findViewById<View>(R.id.membershipL) as EditText
         val phoneNumber = findViewById<View>(R.id.phoneNum) as EditText
         var phoneN : String = number
+        var count : Int = 0
 
         var c = contentResolver.query(member, null, null, null, null)
 
@@ -85,13 +86,21 @@ class EditActivity : AppCompatActivity() {
                         age.setText(c.getString(c.getColumnIndex(MemberProvider.AGE)))
                         membership.setText(c.getString(c.getColumnIndex(MemberProvider.MEMBERSHIP)))
                         phoneNumber.setText(c.getString(c.getColumnIndex(MemberProvider.NUMBER)))
-                    }
-                    else {
-                        Toast.makeText(this, phoneN + "Does not exist",
-                            Toast.LENGTH_SHORT).show()
-                    }
-                } while (c.moveToNext())
 
+                        firstName.isEnabled = true
+                        lastName.isEnabled = true
+                        age.isEnabled = true
+                        membership.isEnabled = true
+                        phoneNumber.isEnabled = true
+
+                        count++
+                    }
+
+                } while (c.moveToNext())
+          if (count ==0){
+    Toast.makeText(this, phoneN + " Does not exist",
+        Toast.LENGTH_SHORT).show()
+         }
             }
         }
     }
@@ -107,13 +116,7 @@ class EditActivity : AppCompatActivity() {
         var phoneN: String = number
 
 
-        var c = contentResolver.query(member, null, null, null, null)
 
-        if (c != null) {
-            if (c?.moveToFirst()) {
-                do {
-
-                    if(c.getString(c.getColumnIndex(MemberProvider.NUMBER)) == number) {
                         val values = ContentValues()
                         values.put(
                             MemberProvider.F_NAME,
@@ -136,13 +139,8 @@ class EditActivity : AppCompatActivity() {
                             (findViewById<View>(R.id.membershipL) as EditText).text.toString()
                         )
                         contentResolver.update(
-                            MemberProvider.CONTENT_URI, values, "NUMBER = ?", arrayOf(phoneNumber.text.toString())
+                            MemberProvider.CONTENT_URI, values, "NUMBER=?", arrayOf(phoneNumber.text.toString())
                         )
                     }
 
-                } while (c.moveToNext())
-
-            }
-        }
-    }
 }
